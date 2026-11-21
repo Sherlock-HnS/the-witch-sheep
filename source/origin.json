@@ -1,0 +1,21 @@
+{
+  "id": "3563403996",
+  "name": "the-witch-sheep",
+  "title": "[PILL PACK] THE WITCH SHEEP",
+  "author": "Dark Star",
+  "status": "extracted_verified",
+  "acquisition": "existing_steam_client_installation",
+  "steamcmd_download_completed": false,
+  "source_workshop_url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3563403996",
+  "source_archive_sha256": "044fab8e8563a301e5773917f9e45eb0e16608ec55e0825232d94520fbbbd56b",
+  "gma_header": {
+    "title": "[PILL PACK] THE WITCH SHEEP",
+    "description": "{\"title\":\"[PILL PACK] THE WITCH SHEEP\",\"type\":\"entity\",\"tags\":[\"movie\",\"realism\",\"cartoon\"],\"ignore\":[\"ogg\"]}",
+    "author": "Author Name",
+    "steam_id": "0",
+    "timestamp": 1793563916
+  },
+  "files": 36,
+  "payload_bytes": 31060305,
+  "roundtrip_verified": true
+}

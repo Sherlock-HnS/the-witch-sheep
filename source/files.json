@@ -1,0 +1,218 @@
+[
+  {
+    "path": "lua/autorun/rachel_ah_start.lua",
+    "size": 10077,
+    "crc": 1301511810,
+    "sha256": "e4834dbf25b55c5d62e5a3957d3a9d56523a789704568b6a10b65b83632554c0"
+  },
+  {
+    "path": "lua/autorun/include/gentoi_killerpills/pill_thetpotrachel.lua",
+    "size": 22372,
+    "crc": 336001250,
+    "sha256": "11c43687c19195cdb756659147e6a8300f446b2ec4fd801e3118f6c0231ca18e"
+  },
+  {
+    "path": "materials/icons/rachel_scanning_icon.png",
+    "size": 13553,
+    "crc": 268487739,
+    "sha256": "67d9db26b26a9cd009ba06fdd198fdf523cc32b28410c4d140b9fcff3a543e66"
+  },
+  {
+    "path": "materials/models/gentoi/anologhorror/rachel/black.vmt",
+    "size": 138,
+    "crc": 1214233332,
+    "sha256": "97f736709f5832ba3204ed93410361488ff6bd9b42fe2f45bdc8d074352d043f"
+  },
+  {
+    "path": "materials/models/gentoi/anologhorror/rachel/collar.vmt",
+    "size": 421,
+    "crc": 610922640,
+    "sha256": "a7c1cfa2add6c223f9f9d37b2b0abef24109e629b3ce1f66868493d321d8dae8"
+  },
+  {
+    "path": "materials/models/gentoi/anologhorror/rachel/body.vmt",
+    "size": 480,
+    "crc": 533582111,
+    "sha256": "a07ad3c265a5f914b4b000157c36c978adaaebd6f7d98fda0301ec190c3e6c72"
+  },
+  {
+    "path": "materials/models/gentoi/anologhorror/rachel/eyes.vmt",
+    "size": 135,
+    "crc": 3285041645,
+    "sha256": "1af55578634fa7d6a2e7fb6029553753a4290b4959afb3648917d28858db41d6"
+  },
+  {
+    "path": "materials/models/gentoi/anologhorror/rachel/face.vmt",
+    "size": 481,
+    "crc": 2129028766,
+    "sha256": "4fab234c049a08b9487df894b601940d7d1bd0da2847c76aff021ca62354ee30"
+  },
+  {
+    "path": "materials/models/gentoi/anologhorror/rachel/collar_d.vtf",
+    "size": 1398352,
+    "crc": 2951635899,
+    "sha256": "1ff2dc5ae738d44f842dfb332845deae602c841fe0395deae5f7bde8049c2422"
+  },
+  {
+    "path": "materials/models/gentoi/anologhorror/rachel/body_d.vtf",
+    "size": 1398352,
+    "crc": 3286440348,
+    "sha256": "860314dd16a7c4e8bc519a4603d2c6581908bae8912bda823dcdc981669d2f5f"
+  },
+  {
+    "path": "materials/models/gentoi/anologhorror/rachel/hat.vmt",
+    "size": 478,
+    "crc": 1717418623,
+    "sha256": "5d4f2553989c5326ce22c67923df4a7998670d5a3d86de33ab3b2f7980828adc"
+  },
+  {
+    "path": "materials/models/gentoi/anologhorror/rachel/hair.vmt",
+    "size": 480,
+    "crc": 1371888615,
+    "sha256": "bfa42897057b4d629f2dd5d21cb9ac05016c3ce310f87d982119b4197da0bec0"
+  },
+  {
+    "path": "materials/models/gentoi/anologhorror/rachel/horns.vmt",
+    "size": 482,
+    "crc": 3999035823,
+    "sha256": "fb030cb3f1d4064ac678f80079060a6a75f73ab622ab1e077e1601654012e2c6"
+  },
+  {
+    "path": "materials/models/gentoi/anologhorror/rachel/face_n.vtf",
+    "size": 1398352,
+    "crc": 1548630975,
+    "sha256": "70a8d436e66a41e2fbdb668031fae946b2b213741b1da2c1d25ed26d4b444383"
+  },
+  {
+    "path": "materials/models/gentoi/anologhorror/rachel/face_d.vtf",
+    "size": 1398352,
+    "crc": 4099029469,
+    "sha256": "34206bcb5bbfbda238a72d9bbe3a208154dbfd2f27df60cf7bbdffd73c96af99"
+  },
+  {
+    "path": "materials/models/gentoi/anologhorror/rachel/teethngums.vmt",
+    "size": 425,
+    "crc": 3939045931,
+    "sha256": "f18a94e2de5024c2d7b340f4772a7c81d1a1738bd5e63b618b730a9ffa3afa5e"
+  },
+  {
+    "path": "materials/models/gentoi/anologhorror/rachel/body_n.vtf",
+    "size": 2796440,
+    "crc": 2920284028,
+    "sha256": "e633cee7aa075424bacd19e6b45de90d5344ed06b23eff2d7ea40e08b727b566"
+  },
+  {
+    "path": "materials/models/gentoi/anologhorror/rachel/hat_d.vtf",
+    "size": 1398352,
+    "crc": 3310896692,
+    "sha256": "fc539117fb703e9fa7517bd43cdb9e4fdbf11637dcde047e081604b2bd9a6923"
+  },
+  {
+    "path": "materials/models/gentoi/anologhorror/rachel/hat_n.vtf",
+    "size": 1398352,
+    "crc": 2754157564,
+    "sha256": "a5d96e69888cbb63b6e5b589cd7c2e921e7bc6698d713f0ed0b7badae8a95cf8"
+  },
+  {
+    "path": "materials/models/gentoi/anologhorror/rachel/horns_n.vtf",
+    "size": 1398352,
+    "crc": 49174541,
+    "sha256": "a8853eb8491b9e68e3e8d0c246959effd712a20465d71256be982bb374d0d870"
+  },
+  {
+    "path": "materials/models/gentoi/anologhorror/rachel/yellowmetal.vmt",
+    "size": 431,
+    "crc": 2225566881,
+    "sha256": "a927e3c921104d9c9bfb185baf10f284106f0b9e252d6b0fc89a6bc5301475ea"
+  },
+  {
+    "path": "materials/models/gentoi/anologhorror/rachel/horns_d.vtf",
+    "size": 1398352,
+    "crc": 1324593060,
+    "sha256": "c8c50cfbc5b9a000e39007c228d0fa8a6d7cf8677ae6983f016412b1d21a03dd"
+  },
+  {
+    "path": "materials/models/gentoi/anologhorror/rachel/teethngums_d.vtf",
+    "size": 1398352,
+    "crc": 109221151,
+    "sha256": "f4179521caa446f252cc899e647914deb2762579d6243aa6d51c5d86d012032b"
+  },
+  {
+    "path": "materials/pills/pill_rachel_ah.png",
+    "size": 248211,
+    "crc": 3093442894,
+    "sha256": "9dd5a466f92256ef6900c0ac1d805ca89ae407f6883c64e40c42ed3b882b56b7"
+  },
+  {
+    "path": "materials/models/gentoi/anologhorror/rachel/tex_eye_d.vtf",
+    "size": 1398352,
+    "crc": 138694339,
+    "sha256": "579f82019f97528eabcbb21410dc892c48eef0b9f5df32bb07947f981cf31fc1"
+  },
+  {
+    "path": "materials/models/gentoi/anologhorror/rachel/teethngums_n.vtf",
+    "size": 1398352,
+    "crc": 2907282122,
+    "sha256": "4a3c68dfba4e2b3b80560deeb54c2c77a5dbddb891f5f5c9858eff1e3325cceb"
+  },
+  {
+    "path": "models/gentoi/anologhorror/rachel.dx90.vtx",
+    "size": 1001763,
+    "crc": 753983284,
+    "sha256": "8f375e7311dea7a767c20bf34e1cafd978b46ebc8806927808cab3d24d8dcaa8"
+  },
+  {
+    "path": "models/gentoi/anologhorror/rachel.phy",
+    "size": 23712,
+    "crc": 2809033265,
+    "sha256": "e71474f40428e8275ea09492394a96289dec7c4ba1f3d6e36ba7f30893b9df70"
+  },
+  {
+    "path": "models/gentoi/anologhorror/rachel.mdl",
+    "size": 319540,
+    "crc": 2375931461,
+    "sha256": "1955e23bd2c892fdfe1b0def44d73d22b76a13cda91b0aad26054058f2178a5d"
+  },
+  {
+    "path": "materials/models/gentoi/anologhorror/rachel/yellowmetal_n.vtf",
+    "size": 1398352,
+    "crc": 1556275214,
+    "sha256": "fbeb0417b539d2adf884f7f3f8f58c20779530f3d65e99e517de4733bc284195"
+  },
+  {
+    "path": "materials/models/gentoi/anologhorror/rachel/yellowmetal_d.vtf",
+    "size": 1398352,
+    "crc": 1913603767,
+    "sha256": "fb1f42312c935150e05d89174a8598db70dbe6f1a0525c0bb971a63dd3f285b6"
+  },
+  {
+    "path": "sound/gentoi/anologhorror/rachel/witchkill.wav",
+    "size": 991310,
+    "crc": 3520709854,
+    "sha256": "f1d7980be206c3c1f80341d31b545f04996158a68f11423c78634a795a8bcd11"
+  },
+  {
+    "path": "materials/models/gentoi/anologhorror/rachel/hair_d.vtf",
+    "size": 1398352,
+    "crc": 3342009357,
+    "sha256": "0fedc839c1472f83c714f5614869d5ed0deaae83d6e259938ef4c1c80018fab3"
+  },
+  {
+    "path": "materials/models/gentoi/anologhorror/rachel/hair_n.vtf",
+    "size": 1398352,
+    "crc": 3041675263,
+    "sha256": "068684df3908fd2ae0d643463a5208206bc58463a135557f102ccbaa256fa031"
+  },
+  {
+    "path": "models/gentoi/anologhorror/rachel.vvd",
+    "size": 3255744,
+    "crc": 1230607640,
+    "sha256": "f88f0caf785ef6924437cb0bc7d1e3960e05b492f7bf2c4560efd4107eb52af6"
+  },
+  {
+    "path": "materials/models/gentoi/anologhorror/rachel/collar_n.vtf",
+    "size": 1398352,
+    "crc": 2649516756,
+    "sha256": "e51225ca860df37a551c2ae9b4ac3c6adac7da31dd86329bb5084d4b51876780"
+  }
+]

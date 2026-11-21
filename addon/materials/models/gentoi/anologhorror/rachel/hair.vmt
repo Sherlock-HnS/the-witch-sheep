@@ -1,0 +1,20 @@
+"VertexlitGeneric"
+{
+    "$basetexture" "models/gentoi/anologhorror/rachel/Hair_d"
+    "$bumpmap"     "models/gentoi/anologhorror/rachel/Hair_n"
+
+    "$phong" "1"
+    "$phongboost" "0.1"                 
+    "$phongexponent" "5"               
+    "$phongfresnelranges" "[0.2 0.5 1]" 
+
+    "$basealphaenvmapmask" "0"
+
+    "$phongalbedotint" "1"
+    "$rimlight" "1"
+    "$rimlightexponent" "2"
+    "$rimlightboost" "0.1"
+
+    "$selfillum" "0"
+    "$nocull" "1"
+}

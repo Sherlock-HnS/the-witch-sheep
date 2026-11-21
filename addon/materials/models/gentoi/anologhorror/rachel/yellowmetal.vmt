@@ -1,0 +1,19 @@
+"VertexlitGeneric"
+{
+    "$basetexture" "models/gentoi/anologhorror/rachel/YellowMetal_d"
+    "$bumpmap"     "models/gentoi/anologhorror/rachel/YellowMetal_n"
+
+    "$phong" "1"
+    "$phongboost" "0.5"
+    "$phongexponent" "15"
+    "$phongfresnelranges" "[0.15 0.5 1]"
+
+    "$phongalbedotint" "1"
+
+    "$rimlight" "1"
+    "$rimlightexponent" "4"
+    "$rimlightboost" "0.2"
+
+    "$selfillum" "0"
+    "$nocull" "1"
+}
