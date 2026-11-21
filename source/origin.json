@@ -4,8 +4,8 @@
   "title": "[PILL PACK] THE WITCH SHEEP",
   "author": "Dark Star",
   "status": "extracted_verified",
-  "acquisition": "existing_steam_client_installation",
-  "steamcmd_download_completed": false,
+  "acquisition": "steamcmd",
+  "steamcmd_download_completed": true,
   "source_workshop_url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3563403996",
   "source_archive_sha256": "044fab8e8563a301e5773917f9e45eb0e16608ec55e0825232d94520fbbbd56b",
   "gma_header": {
