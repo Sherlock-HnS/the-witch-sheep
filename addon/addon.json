@@ -1,12 +1,9 @@
 {
-  "ignore": [
-    "ogg"
-  ],
+  "title": "[PILL PACK] THE WITCH SHEEP",
+  "type": "entity",
   "tags": [
     "movie",
-    "realism",
-    "cartoon"
+    "realism"
   ],
-  "title": "[PILL PACK] THE WITCH SHEEP",
-  "type": "entity"
+  "ignore": []
 }
