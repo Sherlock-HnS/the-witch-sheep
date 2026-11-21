@@ -17,5 +17,6 @@
   },
   "files": 36,
   "payload_bytes": 31060305,
-  "roundtrip_verified": true
+  "roundtrip_verified": true,
+  "packaging_exclusions": []
 }
