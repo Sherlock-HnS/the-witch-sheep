@@ -583,20 +583,27 @@ pk_pills.register('PIll_rachel_ah', {
             end
         end
 
-        ent:SetNWBool("GentoiPills_rachel_xray", GetConVar("GentoiPills_rachel_xray"):GetBool())
-        
+        -- These ConVars are created on the server only.
+        if SERVER then
+            local xrayConVar = GetConVar("GentoiPills_rachel_xray")
+            ent:SetNWBool("GentoiPills_rachel_xray", xrayConVar == nil or xrayConVar:GetBool())
 
-        local speed = {
-            ['walk'] = GetConVar("GentoiPills_rachel_walkspeed"):GetFloat(),
-            ['run'] = GetConVar("GentoiPills_rachel_runspeed"):GetFloat(),
-            ['ducked'] = GetConVar("GentoiPills_rachel_crouchspeed"):GetFloat(),
-            ['jumppower'] = GetConVar("GentoiPills_rachel_jumppower"):GetFloat()
-        }
+            local walkSpeedConVar = GetConVar("GentoiPills_rachel_walkspeed")
+            local runSpeedConVar = GetConVar("GentoiPills_rachel_runspeed")
+            local crouchSpeedConVar = GetConVar("GentoiPills_rachel_crouchspeed")
+            local jumpPowerConVar = GetConVar("GentoiPills_rachel_jumppower")
 
-        if IsValid(ply) and IsValid(ent) then
-            pk_pills.setCostumeMoveSpeed(ent, speed.walk, speed.run, speed.ducked, speed.jumppower)
+            local speed = {
+                walk = walkSpeedConVar and walkSpeedConVar:GetFloat() or 20,
+                run = runSpeedConVar and runSpeedConVar:GetFloat() or 540,
+                ducked = crouchSpeedConVar and crouchSpeedConVar:GetFloat() or 20,
+                jumppower = jumpPowerConVar and jumpPowerConVar:GetFloat() or 0
+            }
+
+            if IsValid(ply) and IsValid(ent) then
+                pk_pills.setCostumeMoveSpeed(ent, speed.walk, speed.run, speed.ducked, speed.jumppower)
+            end
         end
-
         if ent.jumpscare_entity then
             local entity = ent.jumpscare_entity
             if IsValid(entity) then
