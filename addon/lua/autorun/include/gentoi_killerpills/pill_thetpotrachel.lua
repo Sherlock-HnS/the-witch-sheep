@@ -158,6 +158,13 @@ local function racheljackietien_jumpscare(ply, ent, duration, customanimstuff)
         end
     end
 
+    if SherlockHNS and IsValid(jumpscare_entity) and jumpscare_entity:IsPlayer() then
+        return pk_pills.playHNSJumpscare(ply, ent, jumpscare_entity, duration, {
+            camera = "rachel_jumpscare_gen",
+            onStart = customanimstuff,
+        })
+    end
+
     if jumpscare_entity ~= nil then
         
         ent.JuumpscareStart = CurTime()
@@ -464,7 +471,7 @@ pk_pills.register('PIll_rachel_ah', {
         func = function(ply, ent)
 
             local dur = ent:GetPuppet():SequenceDuration(ent:GetPuppet():LookupSequence("jumpscare"))
-            racheljackietien_jumpscare(
+            return racheljackietien_jumpscare(
                 ply,
                 ent,
                 dur,
@@ -487,6 +494,7 @@ pk_pills.register('PIll_rachel_ah', {
                 ent:SetNWInt("Rwallhaks", CurTime()+ GetConVar("GentoiPills_rachel_xray_duration"):GetFloat() )
                 ent:SetNWInt("Rwallhak_duration", GetConVar("GentoiPills_rachel_xray_cd"):GetFloat() )
                 ent:SetNWInt("RwallhaksCooldown", CurTime()+ GetConVar("GentoiPills_rachel_xray_cd"):GetFloat() )
+                pk_pills.setHNSCooldown(ent, "reveal", ent:GetNWInt("RwallhaksCooldown") - CurTime())
             end
         end,
     },
@@ -529,6 +537,7 @@ pk_pills.register('PIll_rachel_ah', {
             local duration = SoundDuration(soundgo[key])
 
             ent.VoiceLineDelay = CurTime() + duration
+            pk_pills.setHNSCooldown(ent, "voice", duration)
 
             AdvancedPillSound(
                 {
@@ -585,10 +594,7 @@ pk_pills.register('PIll_rachel_ah', {
         }
 
         if IsValid(ply) and IsValid(ent) then
-            ply:SetWalkSpeed(speed["walk"])
-            ply:SetRunSpeed(speed["run"])
-            ply:SetCrouchedWalkSpeed(speed["ducked"])
-            ply:SetJumpPower(speed["jumppower"])
+            pk_pills.setCostumeMoveSpeed(ent, speed.walk, speed.run, speed.ducked, speed.jumppower)
         end
 
         if ent.jumpscare_entity then
@@ -614,5 +620,14 @@ pk_pills.register('PIll_rachel_ah', {
             end
         end
     end
-})
+}, function(form)
+    -- The legacy damage branches are for Sandbox and NPCs.
+    form.hnsKillAPI = true
+    form.gentoi_basepill_uifunction_drawfunction = function() end
+    form.hnsAbilities = {
+        { id = "attack", name = "Ataque", key = IN_ATTACK, OnUse = form.attack.func },
+        { id = "reveal", name = "Visão através das paredes", key = IN_ATTACK2, OnUse = form.attack2.func },
+    }
+    form.attack, form.attack2, form.reload = nil, nil, nil
+end)
 
