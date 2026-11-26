@@ -1,17 +1,13 @@
 if SERVER then
     AddCSLuaFile()
     util.AddNetworkString('rachel_jumpscare_gen')
-
 else
-
-
     hook.Add("SetupPlayerVisibility", "VisibilityHandler_v2", function()
         local ply = LocalPlayer()
 
         local pillentity = ply.pk_pill_ent
         if IsValid(pillentity) then
-            if ( pillentity:GetNWInt('Rwallhaks', 0) >= CurTime() ) then
-
+            if (pillentity:GetNWInt('Rwallhaks', 0) >= CurTime()) then
                 for _, ent in ipairs(ents.GetAll()) do
                     if IsValid(ent) then
                         if ent:IsPlayer() or ent:IsNPC() or ent:IsNextBot() then
@@ -22,36 +18,39 @@ else
             end
         end
     end)
-    hook.Add( "PreDrawOutlines_nick_base", "pumpkinwabbitseason_v2", function()
+    hook.Add("PreDrawOutlines_nick_base", "pumpkinwabbitseason_v2", function()
         local ply = LocalPlayer()
 
         local pillentity = ply.pk_pill_ent
         local ent = ply.pk_pill_ent
         if IsValid(pillentity) then
-            ent.Gentoi_witch_indicator_Duration_camlerp = ent.Gentoi_witch_indicator_Duration_camlerp and Lerp(FrameTime()*7, ent.Gentoi_witch_indicator_Duration_camlerp, ent:GetNWInt("Rwallhaks") >= CurTime() and 1 or 0) or 0
+            ent.Gentoi_witch_indicator_Duration_camlerp = ent.Gentoi_witch_indicator_Duration_camlerp and
+            Lerp(FrameTime() * 7, ent.Gentoi_witch_indicator_Duration_camlerp,
+                ent:GetNWInt("Rwallhaks") >= CurTime() and 1 or 0) or 0
             if pillentity.Gentoi_witch_indicator_Duration_camlerp and pillentity.Gentoi_witch_indicator_Duration_camlerp >= 0.05 then
                 local entities = {}
 
                 for _, ent in ipairs(entityTable_pillarchase_recode()) do
                     if IsValid(ent) then
                         if ent:IsPlayer() or ent:IsNPC() or ent:IsNextBot() then
-                            if ent == ply then continue end 
-                            if ent == pillentity then continue end 
+                            if ent == ply then continue end
+                            if ent == pillentity then continue end
                             if ent:IsPlayer() and ent:Team() == TEAM_SPECTATOR then continue end
 
                             if ent:GetColor().a <= 30 then continue end
                             if ent:GetClass() == "pill_puppet" then continue end
 
                             table.insert(entities, ent)
-                            
                         end
                     end
                 end
 
-                nick_base_halo.Add(entities, Color(255*pillentity.Gentoi_witch_indicator_Duration_camlerp,0,255*pillentity.Gentoi_witch_indicator_Duration_camlerp), 3, true)
+                nick_base_halo.Add(entities,
+                    Color(255 * pillentity.Gentoi_witch_indicator_Duration_camlerp, 0,
+                        255 * pillentity.Gentoi_witch_indicator_Duration_camlerp), 3, true)
             end
         end
-    end )
+    end)
 
 
     net.Receive('rachel_jumpscare_gen', function()
@@ -67,7 +66,7 @@ else
             hook.Remove('CalcView', hookID)
         else
             hook.Add('CalcView', hookID, function(ply, pos, angles, fov)
-                if not IsValid(ply) or not ply:Alive() or !IsValid(ent) then
+                if not IsValid(ply) or not ply:Alive() or ! IsValid(ent) then
                     hook.Remove('CalcView', hookID)
                     if IsValid(ply) then
                         ply:RemoveFlags(FL_NOTARGET)
@@ -83,9 +82,9 @@ else
                 ply:Freeze(true)
                 ply:DrawViewModel(false)
 
-                local lerpFactor = math.Clamp((CurTime() - startTime) / (0.7/3), 0, 1)
-                
-                local targetFOV = 80 
+                local lerpFactor = math.Clamp((CurTime() - startTime) / (0.7 / 3), 0, 1)
+
+                local targetFOV = 80
 
                 local orgiginlerpto = LerpVector(lerpFactor, pos, cam.Pos)
                 local angleslerpto = LerpAngle(lerpFactor, angles, cam.Ang)
@@ -101,7 +100,6 @@ else
             end)
         end
     end)
-
 end
 
 local function AdvancedPillSound(SoundData, ent)
@@ -146,23 +144,23 @@ local function racheljackietien_jumpscare(ply, ent, duration, customanimstuff)
 
     local jumpscare_entity = nil
 
-if SherlockHNS then
-    jumpscare_entity = SherlockHNS.FindVictim(ply, ent:LocalToWorld(Vector(0, 0, 50)), 90)
-else
-    for _, ent2 in pairs(ents.FindInSphere(ent:LocalToWorld(Vector(0, 0, 50)), 90)) do
+    if SherlockHNS then
+        jumpscare_entity = SherlockHNS.FindVictim(ply, ent:LocalToWorld(Vector(0, 0, 50)), 90)
+    else
+        for _, ent2 in pairs(ents.FindInSphere(ent:LocalToWorld(Vector(0, 0, 50)), 90)) do
             if (ent2:IsPlayer() or ent2:IsNextBot() or ent2:IsNPC()) and ent2:Health() >= 0.1 then
                 if ent2 == ply then continue end
                 if ent2:IsPlayer() and ent2:Team() == TEAM_SPECTATOR then continue end
-    
+
                 if IsValid(ent2) then
                     jumpscare_entity = ent2
                     break
                 end
             end
         end
-end
+    end
 
-if SherlockHNS and IsValid(jumpscare_entity) and jumpscare_entity:IsPlayer() then
+    if SherlockHNS and IsValid(jumpscare_entity) and jumpscare_entity:IsPlayer() then
         return pk_pills.playHNSJumpscare(ply, ent, jumpscare_entity, duration, {
             camera = "rachel_jumpscare_gen",
             onStart = customanimstuff,
@@ -170,7 +168,6 @@ if SherlockHNS and IsValid(jumpscare_entity) and jumpscare_entity:IsPlayer() the
     end
 
     if jumpscare_entity ~= nil then
-        
         ent.JuumpscareStart = CurTime()
 
         ent.jumpscare_entity = jumpscare_entity
@@ -182,8 +179,8 @@ if SherlockHNS and IsValid(jumpscare_entity) and jumpscare_entity:IsPlayer() the
         targetAngle.p = 0
         targetAngle.r = 0
 
-        ply:SetNWInt("DisableMovement_jumpscare_pill_rachel", duration+CurTime())
-        jumpscare_entity:SetNWInt("DisableMovement_jumpscare_pill_rachel", duration+CurTime())
+        ply:SetNWInt("DisableMovement_jumpscare_pill_rachel", duration + CurTime())
+        jumpscare_entity:SetNWInt("DisableMovement_jumpscare_pill_rachel", duration + CurTime())
 
         ent.IsInJumpscare = CurTime() + duration
 
@@ -195,13 +192,13 @@ if SherlockHNS and IsValid(jumpscare_entity) and jumpscare_entity:IsPlayer() the
             net.WriteBool(true)
             net.Send(jumpscare_entity)
         else
-            jumpscare_entity:NextThink(duration+0.1+CurTime())
+            jumpscare_entity:NextThink(duration + 0.1 + CurTime())
         end
-        
+
         jumpscare_entity:AddFlags(FL_NOTARGET)
 
-        ent:CallOnRemove("RachelJumpscare"..ent:EntIndex(), function()
-            if !IsValid(jumpscare_entity) then return end
+        ent:CallOnRemove("RachelJumpscare" .. ent:EntIndex(), function()
+            if ! IsValid(jumpscare_entity) then return end
 
             jumpscare_entity:RemoveFlags(FL_NOTARGET)
             ent.jumpscare_entity = nil
@@ -232,8 +229,7 @@ gentoi_slowdownfunctions_initialize({
             mv:SetButtons(0)
         end
     end,
-    ["CreateMove"] = function(ply,cmd)
-
+    ["CreateMove"] = function(ply, cmd)
         if ply:GetNWInt("DisableMovement_jumpscare_pill_rachel") >= CurTime() then
             cmd:SetForwardMove(0)
             cmd:SetSideMove(0)
@@ -243,34 +239,34 @@ gentoi_slowdownfunctions_initialize({
     end,
 })
 
-    local preservedmats = {
-        [0] = Material("icons/rachel_scanning_icon.png")
-    }
+local preservedmats = {
+    [0] = Material("icons/rachel_scanning_icon.png")
+}
 pk_pills.register('PIll_rachel_ah', {
 
-    printName='Rachel',
-        
-    model="models/gentoi/anologhorror/Rachel.mdl",
-        
-    modelScale='1.0',
-        
+    printName = 'Rachel',
+
+    model = "models/gentoi/anologhorror/Rachel.mdl",
+
+    modelScale = '1.0',
+
 
     noragdoll = true,
     muteSteps = true,
     _Rachel_pill_ds = true,
     gentoi_basepill = true,
-        
-    anims={
-        default={
-            idle="idle",
-            run="run",
-            walk="walk",
-            jumpscare="jumpscare",
+
+    anims = {
+        default = {
+            idle = "idle",
+            run = "run",
+            walk = "walk",
+            jumpscare = "jumpscare",
             crouch = "CrouchIdle",
             crouch_walk = "CrocuhWalk"
         },
-        ShouldMoveRotate={
-            idle= function(ent) 
+        ShouldMoveRotate = {
+            idle = function(ent)
                 if ent:GetNWBool("Shiftlock") then return "shiftlock" end
                 if ent:GetPillUser():IsOnGround() then
                     return 'notanything'
@@ -278,7 +274,7 @@ pk_pills.register('PIll_rachel_ah', {
                     return 'notshftlock'
                 end
             end,
-            cidle= function(ent) 
+            cidle = function(ent)
                 if ent:GetNWBool("Shiftlock") then return "shiftlock" end
                 if ent:GetPillUser():IsOnGround() then
                     return 'notanything'
@@ -286,64 +282,65 @@ pk_pills.register('PIll_rachel_ah', {
                     return 'notshftlock'
                 end
             end,
-            run= function(ent)
+            run = function(ent)
                 if ent:GetNWBool("Shiftlock") then return "shiftlock" end
                 return 'notshftlock'
             end,
-            walk= function(ent)
+            walk = function(ent)
                 if ent:GetNWBool("Shiftlock") then return "shiftlock" end
                 return 'notshftlock'
             end,
         },
     },
-    
+
 
     moveSpeed = {
         walk = 50,
         run = 540,
-        ducked=20,
+        ducked = 20,
     },
-        
-    sounds={
+
+    sounds = {
         jumpscare = "gentoi/anologhorror/rachel/WitchKill.wav"
     },
 
-    type='ply',
+    type = 'ply',
 
-    camera={
+    camera = {
         offset = Vector(0, 0, 75),
-        dist=120,
+        dist = 120,
     },
-        
-    jumpPower=0,
-        
-    health=2000,
-    
-    movePoseMode="xy",
-        aim={
-        xPose="aim_yaw",
-        yPose="aim_pitch",
+
+    jumpPower = 0,
+
+    health = 2000,
+
+    movePoseMode = "xy",
+    aim = {
+        xPose = "aim_yaw",
+        yPose = "aim_pitch",
         nocrosshair = true
     },
-        
-    gentoi_basepill_uifunction_drawfunction = function(ply,ent)
+
+    gentoi_basepill_uifunction_drawfunction = function(ply, ent)
         local ply = LocalPlayer()
         local pillentity = ent
         local screenW, screenH = ScrW(), ScrH()
 
-        surface.SetDrawColor(35, 35, 35, 255) 
+        surface.SetDrawColor(35, 35, 35, 255)
         local iconsize = screenW / 15
         local xaxis = iconsize / 3
-        local yaxis = screenH - iconsize *1.75
+        local yaxis = screenH - iconsize * 1.75
         surface.DrawRect(xaxis, yaxis, iconsize, iconsize)
 
         -- number counter
 
-        surface.DrawRect(xaxis, yaxis, iconsize*0.1, iconsize)
+        surface.DrawRect(xaxis, yaxis, iconsize * 0.1, iconsize)
 
         local yaxis_bar = yaxis + iconsize
 
-        draw.SimpleText("M2", "DermaLarge", xaxis+ScreenScale(1), yaxis+ScreenScale(1), Color(255, 255, 255), TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
+        draw.SimpleText("M2", "DermaLarge", xaxis + ScreenScale(1), yaxis + ScreenScale(1), Color(255, 255, 255),
+            TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
 
         if pillentity:GetNWBool("GentoiPills_rachel_xray") then
             surface.SetDrawColor(255, 255, 255, 255)
@@ -351,21 +348,23 @@ pk_pills.register('PIll_rachel_ah', {
             surface.SetDrawColor(255, 0, 0, 255)
         end
         surface.SetMaterial(preservedmats[0])
-        surface.DrawTexturedRect(xaxis+iconsize*0.05, yaxis+iconsize*0.1, iconsize*0.9, iconsize*0.9)
+        surface.DrawTexturedRect(xaxis + iconsize * 0.05, yaxis + iconsize * 0.1, iconsize * 0.9, iconsize * 0.9)
 
-        draw.SimpleText("Ghastly Ominance", "Trebuchet18", xaxis+iconsize/2, yaxis+iconsize*0.85, Color(165, 0, 165), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+        draw.SimpleText("Ghastly Ominance", "Trebuchet18", xaxis + iconsize / 2, yaxis + iconsize * 0.85,
+            Color(165, 0, 165), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 
         if pillentity:GetNWInt("RwallhaksCooldown") > CurTime() then
             local yaxis_bar = yaxis + iconsize
-            local iconsize_bar = math.Clamp((pillentity:GetNWInt("RwallhaksCooldown") - CurTime() ) / pillentity:GetNWInt("Rwallhak_duration"), 0, 1)
+            local iconsize_bar = math.Clamp(
+            (pillentity:GetNWInt("RwallhaksCooldown") - CurTime()) / pillentity:GetNWInt("Rwallhak_duration"), 0, 1)
             local lerpfactoriconsize_bar = Lerp(iconsize_bar, screenW / 15, 0)
             local lerpfactoriyaxis_bar = Lerp(iconsize_bar, yaxis, yaxis_bar)
 
-            surface.SetDrawColor(0, 255, 0, 185) 
+            surface.SetDrawColor(0, 255, 0, 185)
             surface.DrawRect(xaxis, lerpfactoriyaxis_bar, iconsize, lerpfactoriconsize_bar)
         end
 
-        if pillentity.Gentoi_witch_indicator_Duration_camlerp and pillentity.Gentoi_witch_indicator_Duration_camlerp >= 0.02 then 
+        if pillentity.Gentoi_witch_indicator_Duration_camlerp and pillentity.Gentoi_witch_indicator_Duration_camlerp >= 0.02 then
             local pp_colour_contrast = 1
 
             local colorModify = {
@@ -382,13 +381,12 @@ pk_pills.register('PIll_rachel_ah', {
 
             DrawColorModify(colorModify)
         end
-
     end,
 
-    gentoi_basepill_camtable = function(ply,ent)
-        local basetable =  {
-            startoffset = Vector(30,0,0),  -- left-up, front-back, up-down
-            dist=100,
+    gentoi_basepill_camtable = function(ply, ent)
+        local basetable = {
+            startoffset = Vector(30, 0, 0), -- left-up, front-back, up-down
+            dist = 100,
             fov = ply:GetInfoNum("gentoipills_basefov", 80),
             id = 0,
             transition = 0,
@@ -396,18 +394,20 @@ pk_pills.register('PIll_rachel_ah', {
             cameraentity = ent:GetPuppet()
         }
 
-        ent.Gentoi_pumpkinrabbit_indicator_Duration_camlerp = ent.Gentoi_pumpkinrabbit_indicator_Duration_camlerp and Lerp(FrameTime()*7, ent.Gentoi_pumpkinrabbit_indicator_Duration_camlerp, ent:GetNW2Float("Gentoi_pumpkinrabbit_indicator_Duration") >= CurTime() and 1 or 0) or 0
-        basetable["fov"] = basetable["fov"] - 20* ent.Gentoi_pumpkinrabbit_indicator_Duration_camlerp
+        ent.Gentoi_pumpkinrabbit_indicator_Duration_camlerp = ent.Gentoi_pumpkinrabbit_indicator_Duration_camlerp and
+        Lerp(FrameTime() * 7, ent.Gentoi_pumpkinrabbit_indicator_Duration_camlerp,
+            ent:GetNW2Float("Gentoi_pumpkinrabbit_indicator_Duration") >= CurTime() and 1 or 0) or 0
+        basetable["fov"] = basetable["fov"] - 20 * ent.Gentoi_pumpkinrabbit_indicator_Duration_camlerp
 
         return basetable
     end,
 
-    canAim=function(ply,ent) return ent.active end,    
+    canAim = function(ply, ent) return ent.active end,
 
     gentoi_basepill_event = function(ply, ent, event)
         if event == "playerded" then
             local jumpscare_entity = ent.jumpscare_entity
-            if !(IsValid(jumpscare_entity)) or !IsValid(ent) then return end
+            if ! (IsValid(jumpscare_entity)) or ! IsValid(ent) then return end
             ent.jumpscare_entity = nil
             jumpscare_entity:SetPos(ent.entitylastpos)
             jumpscare_entity:SetAngles(ent.entitylastang)
@@ -423,24 +423,23 @@ pk_pills.register('PIll_rachel_ah', {
                 jumpscare_entity:TakeDamage(1e9, ply)
                 --[[
                 jumpscare_entity:TakeDamage(jumpscare_entity:Health()-1, ply)
-                
+
                 for i=1,10 do
                     timer.Simple(0.1,function()
                         if !IsValid(ent) then return end
                         if !IsValid(jumpscare_entity) then return end
                         jumpscare_entity:TakeDamage(35, ply)
                     end)
-                
+
                 end
                 ]]
             end
-            ent:RemoveCallOnRemove("RachelJumpscare"..ent:EntIndex())
+            ent:RemoveCallOnRemove("RachelJumpscare" .. ent:EntIndex())
         end
         if event == "BLOODBLOOD" then
+            local offset = ent:GetPuppet():GetRight() * math.Rand(0, 0) +
+            ent:GetPuppet():GetForward() * math.Rand(95, 95) + ent:GetPuppet():GetUp() * math.Rand(65, 65)
 
-
-            local offset = ent:GetPuppet():GetRight() * math.Rand(0, 0) + ent:GetPuppet():GetForward() * math.Rand(95, 95) + ent:GetPuppet():GetUp() * math.Rand(65, 65)
-                
             local effectdata = EffectData()
             effectdata:SetOrigin(ent:GetPuppet():GetPos() + offset)
             effectdata:SetNormal(ent:GetAngles():Forward())
@@ -463,7 +462,6 @@ pk_pills.register('PIll_rachel_ah', {
             effectdata:SetColor(0)
             effectdata:SetFlags(3)
             util.Effect("BloodSplash", effectdata)
-
         end
         if event == "Melee" then
         end
@@ -473,7 +471,6 @@ pk_pills.register('PIll_rachel_ah', {
     attack = {
         mode = 'trigger',
         func = function(ply, ent)
-
             local dur = ent:GetPuppet():SequenceDuration(ent:GetPuppet():LookupSequence("jumpscare"))
             return racheljackietien_jumpscare(
                 ply,
@@ -495,23 +492,23 @@ pk_pills.register('PIll_rachel_ah', {
                 if not GetConVar("GentoiPills_rachel_xray"):GetBool() then return end
                 if ent:GetNWInt("RwallhaksCooldown", 0) >= CurTime() then return end
 
-                ent:SetNWInt("Rwallhaks", CurTime()+ GetConVar("GentoiPills_rachel_xray_duration"):GetFloat() )
-                ent:SetNWInt("Rwallhak_duration", GetConVar("GentoiPills_rachel_xray_cd"):GetFloat() )
-                ent:SetNWInt("RwallhaksCooldown", CurTime()+ GetConVar("GentoiPills_rachel_xray_cd"):GetFloat() )
+                ent:SetNWInt("Rwallhaks", CurTime() + GetConVar("GentoiPills_rachel_xray_duration"):GetFloat())
+                ent:SetNWInt("Rwallhak_duration", GetConVar("GentoiPills_rachel_xray_cd"):GetFloat())
+                ent:SetNWInt("RwallhaksCooldown", CurTime() + GetConVar("GentoiPills_rachel_xray_cd"):GetFloat())
                 pk_pills.setHNSCooldown(ent, "reveal", ent:GetNWInt("RwallhaksCooldown") - CurTime())
             end
         end,
     },
 
-    noragdoll=true,
+    noragdoll = true,
 
 
-    gentoi_basepill_init=function(ply,ent, puppet)
+    gentoi_basepill_init = function(ply, ent, puppet)
         puppet.IsInJumpscare = 0
         puppet:SetNWInt("RwallhaksCooldown", CurTime())
     end,
 
-    reload=function(ply,ent)
+    reload = function(ply, ent)
         --[[
         if not ent.VoiceLineDelay then ent.VoiceLineDelay = 0 end
 
@@ -530,14 +527,14 @@ pk_pills.register('PIll_rachel_ah', {
         }
 
         local key = math.random(0,#soundgo)
-        
+
 
         if soundgo[key] ~= nil then
 
             if SERVER then
                 ent:GetPuppet():AddGestureSequence(ent:GetPuppet():LookupSequence("Spaek"..key+1), true)
             end
-            
+
             local duration = SoundDuration(soundgo[key])
 
             ent.VoiceLineDelay = CurTime() + duration
@@ -557,7 +554,7 @@ pk_pills.register('PIll_rachel_ah', {
 
     flashlight = function(ply, ent)
     end,
-        
+
     jump = function(ply, ent) end,
 
     gentoi_basepill_think = function(ply, ent)
@@ -565,11 +562,11 @@ pk_pills.register('PIll_rachel_ah', {
             if not ent.SetChaseMusicInitilize_agatha_gentoi then
                 ent.SetChaseMusicInitilize_agatha_gentoi = true
                 ply.Gentoi_Chasemusic_shouldplay_killer = function(plye, currentenemy)
-                    if !IsValid(ent) then return end
+                    if ! IsValid(ent) then return end
                     return true
                 end
                 ply.Gentoi_Chasemusic_shouldplay = function(plye, currentenemy)
-                    if !IsValid(ent) then return end
+                    if ! IsValid(ent) then return end
                     if plye then end
                     return true
                 end
@@ -579,7 +576,7 @@ pk_pills.register('PIll_rachel_ah', {
 
         if CLIENT then
             if LocalPlayer() == ply then
-                if ent:GetNWInt("Rwallhaks",0) >= CurTime() then
+                if ent:GetNWInt("Rwallhaks", 0) >= CurTime() then
                     CinemaBarEnable_gentoi(150)
                 else
                     CinemaBarEnable_gentoi(0)
@@ -611,8 +608,7 @@ pk_pills.register('PIll_rachel_ah', {
         if ent.jumpscare_entity then
             local entity = ent.jumpscare_entity
             if IsValid(entity) then
-
-                local lengthofentitybody = (entity:EyePos() - entity:GetPos()):Length() /2
+                local lengthofentitybody = (entity:EyePos() - entity:GetPos()):Length() / 2
 
                 local cam = ent:GetPuppet():GetAttachment(ent:GetPuppet():LookupAttachment('camera'))
 
@@ -620,11 +616,12 @@ pk_pills.register('PIll_rachel_ah', {
                     ent.jumpscare_entity = nil
                 else
                     local mins, maxs = ent:OBBMins(), ent:OBBMaxs()
-                    local lengthofentitybody = ((maxs.z - mins.z)/2)*4
+                    local lengthofentitybody = ((maxs.z - mins.z) / 2) * 4
 
                     local lerpFactor = math.Clamp((CurTime() - ent.JuumpscareStart) / 0.5, 0, 1)
                     local newAngle = LerpAngle(lerpFactor, ent.entitylastang, cam.Ang)
-                    local NewVector = LerpVector(lerpFactor, ent.entitylastpos, cam.Pos - entity:GetUp() * lengthofentitybody)
+                    local NewVector = LerpVector(lerpFactor, ent.entitylastpos,
+                        cam.Pos - entity:GetUp() * lengthofentitybody)
                     entity:SetPos(NewVector)
                     entity:SetAngles(newAngle)
                 end
@@ -636,9 +633,8 @@ pk_pills.register('PIll_rachel_ah', {
     form.hnsKillAPI = true
     form.gentoi_basepill_uifunction_drawfunction = function() end
     form.hnsAbilities = {
-        { id = "attack", name = "Ataque", key = IN_ATTACK, OnUse = form.attack.func },
+        { id = "attack", name = "Ataque",                    key = IN_ATTACK,  OnUse = form.attack.func },
         { id = "reveal", name = "Visão através das paredes", key = IN_ATTACK2, OnUse = form.attack2.func },
     }
     form.attack, form.attack2, form.reload = nil, nil, nil
 end)
-
