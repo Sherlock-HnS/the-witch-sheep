@@ -25,8 +25,8 @@ else
         local ent = ply.pk_pill_ent
         if IsValid(pillentity) then
             ent.Gentoi_witch_indicator_Duration_camlerp = ent.Gentoi_witch_indicator_Duration_camlerp and
-            Lerp(FrameTime() * 7, ent.Gentoi_witch_indicator_Duration_camlerp,
-                ent:GetNWInt("Rwallhaks") >= CurTime() and 1 or 0) or 0
+                Lerp(FrameTime() * 7, ent.Gentoi_witch_indicator_Duration_camlerp,
+                    ent:GetNWInt("Rwallhaks") >= CurTime() and 1 or 0) or 0
             if pillentity.Gentoi_witch_indicator_Duration_camlerp and pillentity.Gentoi_witch_indicator_Duration_camlerp >= 0.05 then
                 local entities = {}
 
@@ -65,6 +65,7 @@ else
         if not state then
             hook.Remove('CalcView', hookID)
         else
+            local warned = false
             hook.Add('CalcView', hookID, function(ply, pos, angles, fov)
                 if not IsValid(ply) or not ply:Alive() or ! IsValid(ent) then
                     hook.Remove('CalcView', hookID)
@@ -76,11 +77,21 @@ else
                     return
                 end
 
-                local cam = ent:GetAttachment(ent:LookupAttachment('camera'))
+                local attachmentId = ent:LookupAttachment('camera')
+                local cam = attachmentId > 0 and ent:GetAttachment(attachmentId) or nil
 
                 ply:AddFlags(FL_NOTARGET)
                 ply:Freeze(true)
                 ply:DrawViewModel(false)
+
+                if not cam then
+                    if not warned then
+                        warned = true
+                        print("[Rachel] attachment 'camera' indisponível. Modelo: " .. tostring(ent:GetModel()))
+                        PrintTable(ent:GetAttachments() or {})
+                    end
+                    return -- sem câmera customizada neste frame; tenta de novo no próximo
+                end
 
                 local lerpFactor = math.Clamp((CurTime() - startTime) / (0.7 / 3), 0, 1)
 
@@ -356,7 +367,7 @@ pk_pills.register('PIll_rachel_ah', {
         if pillentity:GetNWInt("RwallhaksCooldown") > CurTime() then
             local yaxis_bar = yaxis + iconsize
             local iconsize_bar = math.Clamp(
-            (pillentity:GetNWInt("RwallhaksCooldown") - CurTime()) / pillentity:GetNWInt("Rwallhak_duration"), 0, 1)
+                (pillentity:GetNWInt("RwallhaksCooldown") - CurTime()) / pillentity:GetNWInt("Rwallhak_duration"), 0, 1)
             local lerpfactoriconsize_bar = Lerp(iconsize_bar, screenW / 15, 0)
             local lerpfactoriyaxis_bar = Lerp(iconsize_bar, yaxis, yaxis_bar)
 
@@ -395,8 +406,8 @@ pk_pills.register('PIll_rachel_ah', {
         }
 
         ent.Gentoi_pumpkinrabbit_indicator_Duration_camlerp = ent.Gentoi_pumpkinrabbit_indicator_Duration_camlerp and
-        Lerp(FrameTime() * 7, ent.Gentoi_pumpkinrabbit_indicator_Duration_camlerp,
-            ent:GetNW2Float("Gentoi_pumpkinrabbit_indicator_Duration") >= CurTime() and 1 or 0) or 0
+            Lerp(FrameTime() * 7, ent.Gentoi_pumpkinrabbit_indicator_Duration_camlerp,
+                ent:GetNW2Float("Gentoi_pumpkinrabbit_indicator_Duration") >= CurTime() and 1 or 0) or 0
         basetable["fov"] = basetable["fov"] - 20 * ent.Gentoi_pumpkinrabbit_indicator_Duration_camlerp
 
         return basetable
@@ -438,7 +449,7 @@ pk_pills.register('PIll_rachel_ah', {
         end
         if event == "BLOODBLOOD" then
             local offset = ent:GetPuppet():GetRight() * math.Rand(0, 0) +
-            ent:GetPuppet():GetForward() * math.Rand(95, 95) + ent:GetPuppet():GetUp() * math.Rand(65, 65)
+                ent:GetPuppet():GetForward() * math.Rand(95, 95) + ent:GetPuppet():GetUp() * math.Rand(65, 65)
 
             local effectdata = EffectData()
             effectdata:SetOrigin(ent:GetPuppet():GetPos() + offset)
@@ -504,8 +515,8 @@ pk_pills.register('PIll_rachel_ah', {
 
 
     gentoi_basepill_init = function(ply, ent, puppet)
-        puppet.IsInJumpscare = 0
-        puppet:SetNWInt("RwallhaksCooldown", CurTime())
+        -- Nada a inicializar: o cooldown e o estado do jumpscare ficam em ent,
+        -- e o puppet pode ainda não ser válido aqui.
     end,
 
     reload = function(ply, ent)
@@ -607,14 +618,16 @@ pk_pills.register('PIll_rachel_ah', {
         end
         if ent.jumpscare_entity then
             local entity = ent.jumpscare_entity
-            if IsValid(entity) then
+            local puppet = ent:GetPuppet()
+            if IsValid(entity) and IsValid(puppet) then
                 local lengthofentitybody = (entity:EyePos() - entity:GetPos()):Length() / 2
 
-                local cam = ent:GetPuppet():GetAttachment(ent:GetPuppet():LookupAttachment('camera'))
+                local attachmentId = puppet:LookupAttachment('camera')
+                local cam = attachmentId > 0 and puppet:GetAttachment(attachmentId) or nil
 
                 if entity:Health() < 0.1 and entity:IsPlayer() then
                     ent.jumpscare_entity = nil
-                else
+                elseif cam then
                     local mins, maxs = ent:OBBMins(), ent:OBBMaxs()
                     local lengthofentitybody = ((maxs.z - mins.z) / 2) * 4
 
